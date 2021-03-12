@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private float rotationSpeed ;				//Speed at which that the player rotates
 	[SerializeField] private float thrustForce;					//Amount of impulse force applied to player per FixedUpdate
     [SerializeField] private float maxSpeed;					//Player speed limit
-	[SerializeField] public ParticleSystem thurstParticle;
+	[SerializeField] private ParticleSystem thurstParticle;
 
 	private Rigidbody rigidBody;								//Reference to the rigidbody component
 

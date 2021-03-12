@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
 	[Header("Player Properties")]
 	[SerializeField] private GameObject playerPrefab;
 	[SerializeField] private GameObject defaultPlayerRespawnPoint;
+	[SerializeField] private float playerRespawnDelay;
 
 	[Header("Asteroid Properties")]
 	[SerializeField] private GameObject[] asteroidsPrefabs;
@@ -21,7 +22,9 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] private float ufoSpawnTime = 10.0f;
 
 
-	public GameObject playerObject;
+	[HideInInspector] public GameObject playerObject;
+	[HideInInspector] public bool playerIsDead = false;
+
 	private float[] screenEdges;                                    // edges of the screen in world coordinates [left, right, bottom, top]
 	private GameObject[] respawnPoints;
 	private Vector3 safeRespawnPos;
@@ -57,21 +60,31 @@ public class SpawnManager : MonoBehaviour
 
 	public void SpawnPlayer()
     {
+		StartCoroutine(PlayerSpawnTimer());
+	}
+
+	IEnumerator PlayerSpawnTimer()
+    {
+		yield return new WaitForSeconds(playerRespawnDelay);
+
 		if (defaultPlayerRespawnPoint.GetComponent<SafeSpawnHelper>().isSafe)
-        {
+		{
 			safeRespawnPos = defaultPlayerRespawnPoint.transform.position;
 		}
 		else
-        {
+		{
 			safeRespawnPos = GetSafeRespawnPos();
 		}
 
 		playerObject = Instantiate(playerPrefab, safeRespawnPos, playerPrefab.transform.rotation) as GameObject;
-    }
+		playerIsDead = false;
+	}
 
 	public void SpawnAsteroids()
     {
-		StartCoroutine(WaitSomeTime());
+		if (playerObject == null)
+			playerObject = defaultPlayerRespawnPoint;
+
 		for (int a = 0; a < asteroidsPrefabs.Length; a++)
 		{
 			for (int i = 0; i < maxAsteroidPerType[a]; i++)

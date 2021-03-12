@@ -25,4 +25,9 @@ public class UFOMovement : MonoBehaviour
         movDirection = Random.insideUnitCircle.normalized;
     }
 
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 }

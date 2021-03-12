@@ -19,7 +19,7 @@ public class UFOAttack : MonoBehaviour
 
     void ShootBullet()
     {
-        if (SpawnManager.Instance.playerObject != null)
+        if (!SpawnManager.Instance.playerIsDead)
         {
             targetDirection = (SpawnManager.Instance.playerObject.transform.position - transform.position).normalized;
             Vector3 noiseVector = Random.Range(-errorFactor, errorFactor) * Vector2.Perpendicular(new Vector2(targetDirection.x, targetDirection.y));
@@ -27,5 +27,10 @@ public class UFOAttack : MonoBehaviour
             bulletRotation = Quaternion.LookRotation(Vector3.forward, targetDirection);
             Instantiate(bulletPrefab, transform.position, bulletRotation);
         }
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 }
