@@ -7,6 +7,7 @@ public class AsteroidHit : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private GameObject modelPrefab;
     [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private AudioSource explosionSound;
     [SerializeField] public GameObject[] smallerAsteroids;
     [SerializeField] private Behaviour[] behavioursToDisable;
 
@@ -22,6 +23,7 @@ public class AsteroidHit : MonoBehaviour
                 script.enabled = false;
             modelPrefab.SetActive(false);
             explosionParticle.Play();
+            explosionSound.Play();
 
             GameManager.Instance.UpdateScore(score);
 

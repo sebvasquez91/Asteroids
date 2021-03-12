@@ -7,6 +7,7 @@ public class UFOHit : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private GameObject modelPrefab;
     [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private AudioSource explosionSound;
     [SerializeField] private Behaviour[] behavioursToDisable;
 
     private bool ufoHit = false;
@@ -21,6 +22,7 @@ public class UFOHit : MonoBehaviour
                 script.enabled = false;
             modelPrefab.SetActive(false);
             explosionParticle.Play();
+            explosionSound.Play();
 
             GameManager.Instance.UpdateScore(score);
 

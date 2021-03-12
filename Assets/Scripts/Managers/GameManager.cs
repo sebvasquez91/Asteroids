@@ -26,15 +26,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool infiniteLives;
 
     [HideInInspector] public float[] screenEdges;           // edges of the screen in world coordinates [left, right, bottom, top]
-    public bool gameStarted;
-    public bool gamePaused;
-    public bool gameOver;
+    [HideInInspector] public bool gameStarted;
+    [HideInInspector] public bool gamePaused;
+    [HideInInspector] public bool gameOver;
+    [HideInInspector] public int livesLeft;
 
     private float originalTimeScale;
     private float camDistance;
     private int currentScore;
-    public int livesLeft;
     private GameObject[] lifeSprites;
+    private AudioSource[] allAudioSources;
 
     void Awake()
     {
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") & gameStarted & !gameOver)
+        if (Input.GetButtonDown("Cancel") && gameStarted && !gameOver)
         {
             PauseGame();
         }
@@ -152,6 +153,9 @@ public class GameManager : MonoBehaviour
 
             PauseScreenUI.SetActive(true);
             gamePaused = true;
+
+            if (SpawnManager.Instance.UFOObject != null)
+                SpawnManager.Instance.UFOObject.GetComponent<UFOMovement>().PauseUFOSound();
         }
         else
         {
@@ -160,6 +164,9 @@ public class GameManager : MonoBehaviour
 
             PauseScreenUI.SetActive(false);
             gamePaused = false;
+
+            if (SpawnManager.Instance.UFOObject != null)
+                SpawnManager.Instance.UFOObject.GetComponent<UFOMovement>().UnPauseUFOSound();
         }
     }
 
@@ -168,8 +175,19 @@ public class GameManager : MonoBehaviour
         //Sets the timescale to 0 (which freezes time)
         Time.timeScale = 0f;
 
+        StopAllAudio();
         GameOverScreenUI.SetActive(true);
         gameOver = true;
+    }
+
+    void StopAllAudio()
+    {
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+
+        foreach (AudioSource audioS in allAudioSources)
+        {
+            audioS.Stop();
+        }
     }
 
     void RestartGame()

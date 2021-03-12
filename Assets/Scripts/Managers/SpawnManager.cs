@@ -18,11 +18,12 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField] private float safeZoneRange;
 
 	[Header("UFO Properties")]
-	[SerializeField] private GameObject UFO;
+	[SerializeField] private GameObject UFOPrefab;
 	[SerializeField] private float ufoSpawnTime = 10.0f;
 
 
 	[HideInInspector] public GameObject playerObject;
+	[HideInInspector] public GameObject UFOObject;
 	[HideInInspector] public bool playerIsDead = false;
 
 	private float[] screenEdges;                                    // edges of the screen in world coordinates [left, right, bottom, top]
@@ -102,7 +103,7 @@ public class SpawnManager : MonoBehaviour
 	IEnumerator UFOTimer()
 	{
 		yield return new WaitForSeconds(ufoSpawnTime);
-		Instantiate(UFO, RandomEdgePosition(), UFO.transform.rotation);
+		UFOObject = Instantiate(UFOPrefab, RandomEdgePosition(), UFOPrefab.transform.rotation) as GameObject;
 	}
 
 	Vector3 GetSafeRespawnPos()

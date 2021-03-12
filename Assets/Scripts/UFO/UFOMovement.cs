@@ -6,6 +6,7 @@ public class UFOMovement : MonoBehaviour
 {
     [SerializeField] private float ufoSpeed;
     [SerializeField] private float dirChangeRate;
+    [SerializeField] private AudioSource UFOSound;
 
     private Vector3 movDirection;
 
@@ -13,11 +14,14 @@ public class UFOMovement : MonoBehaviour
     {
         movDirection = (-transform.position).normalized;
         InvokeRepeating("RandomDirection", dirChangeRate, dirChangeRate);
+        UFOSound.Play();
     }
+
 
     void FixedUpdate()
     {
         transform.Translate(movDirection * ufoSpeed * Time.fixedDeltaTime, Space.World);
+
     }
 
     void RandomDirection()
@@ -28,6 +32,17 @@ public class UFOMovement : MonoBehaviour
     void OnDisable()
     {
         CancelInvoke();
+        UFOSound.Stop();
+    }
+
+    public void UnPauseUFOSound()
+    {
+        UFOSound.UnPause();
+    }
+
+    public void PauseUFOSound()
+    {
+        UFOSound.Pause();
     }
 
 }

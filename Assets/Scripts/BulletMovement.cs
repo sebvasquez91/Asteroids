@@ -14,9 +14,9 @@ public class BulletMovement : MonoBehaviour
         timeAlive = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(Vector3.up * bulletSpeed * Time.deltaTime, Space.Self);
+        transform.Translate(Vector3.up * bulletSpeed * Time.fixedDeltaTime, Space.Self);
         timeAlive += Time.deltaTime;
         if (timeAlive > bulletMaxTime)
             Destroy(gameObject);

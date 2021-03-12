@@ -12,7 +12,7 @@ public class WrappingEffect : MonoBehaviour
         screenEdges = GameManager.Instance.screenEdges;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         ScreenWrapper();
     }

@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
         if (timer > spacebarCoolDown)
         {
             // On spacebar press, shoot bullet
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && !SpawnManager.Instance.playerIsDead && !GameManager.Instance.gamePaused)
             {
                 timer = 0;
                 Instantiate(bulletPrefab, transform.position, transform.rotation);

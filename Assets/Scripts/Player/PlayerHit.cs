@@ -6,6 +6,7 @@ public class PlayerHit : MonoBehaviour
 {
     [SerializeField] private GameObject modelPrefab;
     [SerializeField] private ParticleSystem explosionParticle;
+    [SerializeField] private AudioSource explosionSound;
     [SerializeField] private Behaviour[] behavioursToDisable;
 
     private bool playerHit = false;
@@ -23,6 +24,7 @@ public class PlayerHit : MonoBehaviour
                     script.enabled = false;
                 modelPrefab.SetActive(false);
                 explosionParticle.Play();
+                explosionSound.Play();
                 StartCoroutine(waitToDestroy());
             }
 
