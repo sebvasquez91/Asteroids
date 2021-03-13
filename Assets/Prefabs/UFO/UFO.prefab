@@ -163,7 +163,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4939896579069424589, guid: 74170f933327e4d7a995843304142976,
     type: 3}
   shootDelay: 2
-  shootFreq: 1
+  shootRate: 1
   errorFactor: 0.3
 --- !u!114 &6918771558909442509
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePad: 1
+  edgePadding: 1
 --- !u!114 &6918771558909442508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ufoSpeed: 1.5
-  dirChangeRate: 10
-  UFOSound: {fileID: 7762418383461838231}
+  dirChangeRate: 8
+  ufoSound: {fileID: 7762418383461838231}
 --- !u!82 &7762418383461838231
 AudioSource:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 200
-  modelPrefab: {fileID: 5366744317978216341}
+  modelObject: {fileID: 5366744317978216341}
   explosionParticle: {fileID: 6888992951601012482}
   explosionSound: {fileID: -1630925301341812126}
   behavioursToDisable:

@@ -1,4 +1,4 @@
-void VertShader(inout appdata_full v, out Input data)
+﻿void VertShader(inout appdata_full v, out Input data)
 {
 	v.vertex.x += _VertexOffsetX;
 	v.vertex.y += _VertexOffsetY;
@@ -48,7 +48,7 @@ void PixShader(Input input, inout SurfaceOutput o)
 	float outline = _OutlineWidth*_ScaleRatioA * scale;
 	float softness = _OutlineSoftness*_ScaleRatioA * scale;
 
-	// Color & Alpha
+	// Color && Alpha
 	float4 faceColor = _FaceColor;
 	float4 outlineColor = _OutlineColor;
 	faceColor *= input.color;

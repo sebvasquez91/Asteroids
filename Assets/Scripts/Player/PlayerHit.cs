@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
-    [SerializeField] private GameObject modelPrefab;
+    [Tooltip("Reference to the model player ship child object.")]
+    [SerializeField] private GameObject modelObject;
+    [Tooltip("ference to the explosion particle child object.")]
     [SerializeField] private ParticleSystem explosionParticle;
+    [Tooltip("Reference to the explosion sound component.")]
     [SerializeField] private AudioSource explosionSound;
-    [SerializeField] private Behaviour[] behavioursToDisable;
 
-    private bool playerHit = false;
     private float waitToDestroyTime = 1.0f;
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!playerHit & (other.gameObject.CompareTag("Asteroid") | other.gameObject.CompareTag("UFOBullet")))
+        if (!SpawnManager.Instance.playerIsDead && (other.gameObject.CompareTag("Asteroid") || other.gameObject.CompareTag("UFOBullet")))
         {
             if (!GameManager.Instance.invinciblePlayer)
             {
-                playerHit = true;
                 SpawnManager.Instance.playerIsDead = true;
-                foreach (Behaviour script in behavioursToDisable)
-                    script.enabled = false;
-                modelPrefab.SetActive(false);
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                modelObject.SetActive(false);
                 explosionParticle.Play();
                 explosionSound.Play();
                 StartCoroutine(waitToDestroy());
@@ -35,7 +34,10 @@ public class PlayerHit : MonoBehaviour
         }
     }
 
-    IEnumerator waitToDestroy()
+    /// <summary>
+	/// Waits some time to play the particle and sound effects, before destroying game object.
+	/// </summary>
+    private IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(waitToDestroyTime);
         GameManager.Instance.PlayerDied();

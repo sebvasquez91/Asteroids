@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class UFOHit : MonoBehaviour
 {
-    [SerializeField] private int score;
-    [SerializeField] private GameObject modelPrefab;
+    [Tooltip("How many points are awarded when UFO enemy is hit.")]
+    [SerializeField] private int score = 200;
+    [Tooltip("Reference to the model UFO child object.")]
+    [SerializeField] private GameObject modelObject;
+    [Tooltip("ference to the explosion particle child object.")]
     [SerializeField] private ParticleSystem explosionParticle;
+    [Tooltip("Reference to the explosion sound component.")]
     [SerializeField] private AudioSource explosionSound;
-    [SerializeField] private Behaviour[] behavioursToDisable;
 
+    private Behaviour[] behavioursToDisable;
     private bool ufoHit = false;
     private float waitToDestroyTime = 1.0f;
 
-    void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (!ufoHit & other.gameObject.CompareTag("PlayerBullet"))
+        behavioursToDisable = new Behaviour[] {
+            gameObject.GetComponent<UFOAttack>(),
+            gameObject.GetComponent<UFOMovement>(),
+            gameObject.GetComponent<WrappingEffect>()
+        };
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!ufoHit && other.gameObject.CompareTag("PlayerBullet"))
         {
             ufoHit = true;
             foreach (Behaviour script in behavioursToDisable)
+            {
                 script.enabled = false;
-            modelPrefab.SetActive(false);
+            }
+            modelObject.SetActive(false);
             explosionParticle.Play();
             explosionSound.Play();
 
@@ -32,10 +47,13 @@ public class UFOHit : MonoBehaviour
         }
     }
 
-    IEnumerator waitToDestroy()
+    /// <summary>
+	/// Waits some time to play the particle and sound effects, before destroying game object.
+	/// </summary>
+    private IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(waitToDestroyTime);
-        SpawnManager.Instance.SpawnUFO();
+        SpawnManager.Instance.UFODestroyed();
         Destroy(gameObject);
     }
 }

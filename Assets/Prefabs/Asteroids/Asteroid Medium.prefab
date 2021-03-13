@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePad: 1
+  edgePadding: 1
 --- !u!114 &3923217041733608658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidSpeed: 1.5
+  applyTorque: 0
   maxTorque: 10
 --- !u!114 &3923217041733608657
 MonoBehaviour:
@@ -107,12 +108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 50
-  modelPrefab: {fileID: 4053243381076080749}
+  modelObject: {fileID: 4053243381076080749}
   explosionParticle: {fileID: 798491706650204480}
   explosionSound: {fileID: 6477146240952904309}
-  smallerAsteroids:
-  - {fileID: 646645698722290892, guid: 0c96a033d8432497d9eef743b62f6964, type: 3}
-  - {fileID: 646645698722290892, guid: 0c96a033d8432497d9eef743b62f6964, type: 3}
+  splitAsteroidsPrefab: {fileID: 646645698722290892, guid: 0c96a033d8432497d9eef743b62f6964,
+    type: 3}
   behavioursToDisable:
   - {fileID: 3923217041733608658}
   - {fileID: 3923217041733608659}

@@ -4948,7 +4948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePad: 1
+  edgePadding: 1
 --- !u!114 &3843921087243939043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4976,7 +4976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d0ebabb1be54c97ae9b6004d4d350c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 4343964049339638388}
+  modelObject: {fileID: 4343964049339638388}
   explosionParticle: {fileID: 2290603402632240840}
   explosionSound: {fileID: -4639335581418213140}
   behavioursToDisable:

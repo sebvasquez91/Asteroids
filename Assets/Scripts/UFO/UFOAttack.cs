@@ -5,31 +5,42 @@ using UnityEngine;
 public class UFOAttack : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float shootDelay;          // in seconds
-    [SerializeField] private float shootFreq;           // in seconds
-    [SerializeField] private float errorFactor;         // in seconds
+    [SerializeField] private float shootDelay = 2.0f;       // Dalay in start of shooting in seconds
+    [SerializeField] private float shootRate = 1.0f;        // UFO shooting rate in seconds
+    [SerializeField] private float errorFactor = 0.3f;      // Sets the precision of the UFO shooting. The errorFactor determines the range
+                                                            // of posible shooting angles, with 1.0 being the largest and most imprecise (180 deg)
+                                                            // and 0.0 giving no error
 
-    private Vector3 targetDirection;
-    private Quaternion bulletRotation;
-
-    void Start()
+    private void Start()
     {
-        InvokeRepeating("ShootBullet", shootDelay, shootFreq);
+        // The UFO enemy will shoot a bullet every shootRate seconds, starting shootDelay seconds after spawning
+        InvokeRepeating("ShootBullet", shootDelay, shootRate);
     }
 
-    void ShootBullet()
+    /// <summary>
+	/// Shoots a bullet from the UFO towards the current direction of the player.
+	/// </summary>
+    private void ShootBullet()
     {
         if (!SpawnManager.Instance.playerIsDead)
         {
-            targetDirection = (SpawnManager.Instance.playerObject.transform.position - transform.position).normalized;
-            Vector3 noiseVector = Random.Range(-errorFactor, errorFactor) * Vector2.Perpendicular(new Vector2(targetDirection.x, targetDirection.y));
-            targetDirection += noiseVector;
-            bulletRotation = Quaternion.LookRotation(Vector3.forward, targetDirection);
-            Instantiate(bulletPrefab, transform.position, bulletRotation);
+            Instantiate(bulletPrefab, transform.position, GetBulletDirection());
         }
     }
 
-    void OnDisable()
+    /// <summary>
+	/// Finds the direction at which the bullet from the UFO to the player should be shot, plus some error determined by errorFactor.
+	/// </summary>
+    /// /// <returns>A Quaternion that will rotate the spawned bullet towards the player.</returns>
+    private Quaternion GetBulletDirection()
+    {
+        Vector3 targetDirection = (SpawnManager.Instance.playerObject.transform.position - transform.position).normalized;
+        Vector3 noiseVector = Random.Range(-errorFactor, errorFactor) * Vector2.Perpendicular(new Vector2(targetDirection.x, targetDirection.y));
+        targetDirection += noiseVector;
+        return Quaternion.LookRotation(Vector3.forward, targetDirection);
+    }
+
+    private void OnDisable()
     {
         CancelInvoke();
     }

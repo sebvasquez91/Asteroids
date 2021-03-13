@@ -10,17 +10,21 @@ public class PlayerAttack : MonoBehaviour
     private float timer = 0.0f;
 
 
-    void Update()
+    private void Update()
     {
-        if (timer > spacebarCoolDown)
+        if (!SpawnManager.Instance.playerIsDead && !GameManager.Instance.gamePaused)
         {
-            // On spacebar press, shoot bullet
-            if (Input.GetKeyDown(KeyCode.Space) && !SpawnManager.Instance.playerIsDead && !GameManager.Instance.gamePaused)
+            // Implements a shooting cool-down time to prevent spamming of the spacebar
+            if (timer > spacebarCoolDown)
             {
-                timer = 0;
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
+                // On spacebar press, shoot bullet
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    timer = 0;
+                    Instantiate(bulletPrefab, transform.position, transform.rotation);
+                }
             }
+            timer += Time.deltaTime;
         }
-        timer += Time.deltaTime;
     }
 }

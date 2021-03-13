@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 8044682876208450672}
   - component: {fileID: 9039808894443436220}
   - component: {fileID: 1912130318189657645}
-  - component: {fileID: 8366428069624556206}
-  - component: {fileID: 5257267204504001265}
+  - component: {fileID: 6205931908672829358}
+  - component: {fileID: 181256831108953414}
   m_Layer: 0
-  m_Name: UFOBullet
-  m_TagString: UFOBullet
+  m_Name: PlayerBullet
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6ee024cf112a34545a0c27df874f6903, type: 2}
+  - {fileID: 2100000, guid: c44399b074b8149ce9d6f20a2d51f61f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1facf1e36a4af4ae4a945b5692f6ba64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 5
-  bulletMaxTime: 2
---- !u!114 &8366428069624556206
+  bulletSpeed: 12
+  bulletLifeTime: 0.8
+--- !u!114 &6205931908672829358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePad: 1
---- !u!82 &5257267204504001265
+  edgePadding: 0
+--- !u!82 &181256831108953414
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0044214f16d6848a9940a7ff82f8950b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f6344d2a1ef99440d8f7494da30fbe41, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
