@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < nLivesToAdd; i++)
         {
             lifeSprites.Add(Instantiate(lifeSpritePrefab, playTimeUI.transform) as GameObject);
-            lifeSprites[lifeSprites.Count - 1].GetComponent<RectTransform>().Translate(lifeSpriteSpacing * (lifeSprites.Count), 0, 0);
+            lifeSprites[lifeSprites.Count - 1].GetComponent<RectTransform>().Translate(lifeSpriteSpacing * lifeSprites.Count, 0, 0);
         }
     }
 
