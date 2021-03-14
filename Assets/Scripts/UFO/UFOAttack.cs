@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class UFOAttack : MonoBehaviour
 {
+    [Tooltip("Reference to prefab of bullets shot by the UFO enemy.")]
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float shootDelay = 2.0f;       // Dalay in start of shooting in seconds
-    [SerializeField] private float shootRate = 1.0f;        // UFO shooting rate in seconds
-    [SerializeField] private float errorFactor = 0.3f;      // Sets the precision of the UFO shooting. The errorFactor determines the range
-                                                            // of posible shooting angles, with 1.0 being the largest and most imprecise (180 deg)
-                                                            // and 0.0 giving no error
+    [Tooltip("Delay in start of shooting in seconds.")]
+    [SerializeField] private float shootDelay = 2.0f;
+    [Tooltip("UFO shooting rate in seconds.")]
+    [SerializeField] private float shootRate = 1.0f;
+    [Tooltip("Sets the range of posible shooting angles, with 1.0 being the largest and most imprecise (180 deg) and 0.0 giving no error.")]
+    [SerializeField] private float errorFactor = 0.3f;
 
     private void Start()
     {

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePadding: 0
+  edgePadding: 1
 --- !u!82 &181256831108953414
 AudioSource:
   m_ObjectHideFlags: 0

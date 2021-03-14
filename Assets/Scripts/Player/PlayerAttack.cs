@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Tooltip("Reference to prefab of bullets shot by the player.")]
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float spacebarCoolDown;
+    [Tooltip("Cool-down time for player attack.")]
+    [SerializeField] private float spacebarCoolDown = 0.05f;
 
-    private float timer = 0.0f;
+    private float cooldownTimer = 0.0f;
 
 
     private void Update()
@@ -15,16 +17,16 @@ public class PlayerAttack : MonoBehaviour
         if (!SpawnManager.Instance.playerIsDead && !GameManager.Instance.gamePaused)
         {
             // Implements a shooting cool-down time to prevent spamming of the spacebar
-            if (timer > spacebarCoolDown)
+            if (cooldownTimer > spacebarCoolDown)
             {
                 // On spacebar press, shoot bullet
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    timer = 0;
+                    cooldownTimer = 0;
                     Instantiate(bulletPrefab, transform.position, transform.rotation);
                 }
             }
-            timer += Time.deltaTime;
+            cooldownTimer += Time.deltaTime;
         }
     }
 }
