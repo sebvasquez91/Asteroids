@@ -13,6 +13,7 @@ public class PlayerHit : MonoBehaviour
 
     private float waitToDestroyTime = 1.0f;
 
+    // When player is hit by an asteroid or a bullet shot by the UFO, play sound & particle effect, then destroy player
     private void OnTriggerEnter(Collider other)
     {
         if (!SpawnManager.Instance.playerIsDead && (other.gameObject.CompareTag("Asteroid") || other.gameObject.CompareTag("UFOBullet")))
@@ -29,7 +30,7 @@ public class PlayerHit : MonoBehaviour
 
             if (other.gameObject.CompareTag("UFOBullet"))
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject);  // Bullets are destroyed in the process
             }
         }
     }
@@ -40,7 +41,7 @@ public class PlayerHit : MonoBehaviour
     private IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(waitToDestroyTime);
-        GameManager.Instance.PlayerDied();
+        GameManager.Instance.PlayerDied();             // Calls player respawner spending one life. If no lives are left, calls GameOver
         Destroy(gameObject);
     }
 }

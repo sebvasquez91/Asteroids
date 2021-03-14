@@ -45,7 +45,7 @@ public class SpawnManager : MonoBehaviour
 
 	private void Start()
     {
-		playAreaLimits = GameManager.Instance.playAreaLimits;
+		playAreaLimits = GameManager.Instance.playAreaLimits;  // Instance.playAreaLimits is defined on GameManager's Awake() so keep this on Start() to prevent exceptions
 		FindVisibleSpawnPoints();
 	}
 
@@ -109,6 +109,14 @@ public class SpawnManager : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Called by the AsteroidHit script of the last remaining asteroid to trigger the respawning of a new batch.
+	/// </summary>
+	public void LastAsteroidDestroyed()
+	{
+		StartCoroutine(AsteroidSpawnTimer());
+	}
+
+	/// <summary>
 	/// Waits until a player object has been respawned and the last asteroid removed to call the spawner of a new batch of asteroids.
 	/// </summary>
 	public IEnumerator AsteroidSpawnTimer()
@@ -122,7 +130,7 @@ public class SpawnManager : MonoBehaviour
 
 	/// <summary>
 	/// Spawns of a new batch of asteroids at random locations and at a given safe distance from the player.
-    /// Specific numbers of asteroids of different sizes might be spawned.
+    /// A specific numbers of asteroids of each size might be spawned.
 	/// </summary>
 	private void SpawnAsteroids()
     {
@@ -136,11 +144,11 @@ public class SpawnManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Called by the AsteroidHit script of the last remaining asteroid to trigger the respawning of a new batch.
+	/// Called by the UFOHit script of a hit UFO to start the spawn timer of the next one.
 	/// </summary>
-	public void LastAsteroidDestroyed()
+	public void UFODestroyed()
 	{
-		StartCoroutine(AsteroidSpawnTimer());
+		StartCoroutine(UFOSpawnTimer());
 	}
 
 	/// <summary>
@@ -158,14 +166,6 @@ public class SpawnManager : MonoBehaviour
 	private void SpawnUFO()
     {
 		ufoObject = Instantiate(ufoPrefab, RandomEdgePosition(), ufoPrefab.transform.rotation) as GameObject; 
-	}
-
-	/// <summary>
-	/// Called by the UFOHit script of a hit UFO to start the spawn timer of the next one.
-	/// </summary>
-	public void UFODestroyed()
-	{
-		StartCoroutine(UFOSpawnTimer());
 	}
 
 	/// <summary>

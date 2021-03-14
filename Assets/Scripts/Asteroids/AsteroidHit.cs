@@ -27,11 +27,14 @@ public class AsteroidHit : MonoBehaviour
         };
     }
 
+    // When asteroid is hit by a bullet shot by the player, play sound & particle effect, then destroy asteroid
     private void OnTriggerEnter(Collider other)
     {
         if (!asteroidHit && other.gameObject.CompareTag("PlayerBullet"))
         {
             asteroidHit = true;
+            // Disable collider and some of the object behaviours while destroy effects are being played
+            gameObject.GetComponent<Collider>().enabled = false;
             foreach (Behaviour script in behavioursToDisable)
             {
                 script.enabled = false;
@@ -42,8 +45,9 @@ public class AsteroidHit : MonoBehaviour
 
             GameManager.Instance.UpdateScore(score);
 
-            Destroy(other.gameObject);
+            Destroy(other.gameObject);  // Bullets are destroyed in the process
 
+            // Instantiate two smaller asteroids if a prefab has been set
             if (splitAsteroidsPrefab != null)
             {
                 Instantiate(splitAsteroidsPrefab, transform.position, transform.rotation);
@@ -62,7 +66,7 @@ public class AsteroidHit : MonoBehaviour
         yield return new WaitForSeconds(waitToDestroyTime);
         if (GameObject.FindGameObjectsWithTag("Asteroid").Length == 1)
         {
-            SpawnManager.Instance.LastAsteroidDestroyed();
+            SpawnManager.Instance.LastAsteroidDestroyed();      // If this is the last remaining asteroid, call the spawner of a new batch
         }
         Destroy(gameObject);
     }

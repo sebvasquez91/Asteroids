@@ -192,9 +192,6 @@ MonoBehaviour:
   explosionSound: {fileID: 3134654515720806867}
   splitAsteroidsPrefab: {fileID: 3923217041733608665, guid: b9155b35900fa43b59fe41fa7a20d9e6,
     type: 3}
-  behavioursToDisable:
-  - {fileID: 3353268505135185927}
-  - {fileID: 3353268505135185924}
 --- !u!82 &3134654515720806867
 AudioSource:
   m_ObjectHideFlags: 0

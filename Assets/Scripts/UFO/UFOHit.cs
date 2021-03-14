@@ -26,11 +26,14 @@ public class UFOHit : MonoBehaviour
         };
     }
 
+    // When UFO is hit by a bullet shot by the player, play sound & particle effect, then destroy UFO
     private void OnTriggerEnter(Collider other)
     {
         if (!ufoHit && other.gameObject.CompareTag("PlayerBullet"))
         {
             ufoHit = true;
+            // Disable collider and some of the object behaviours while destroy effects are being played
+            gameObject.GetComponent<Collider>().enabled = false;
             foreach (Behaviour script in behavioursToDisable)
             {
                 script.enabled = false;
@@ -53,7 +56,7 @@ public class UFOHit : MonoBehaviour
     private IEnumerator waitToDestroy()
     {
         yield return new WaitForSeconds(waitToDestroyTime);
-        SpawnManager.Instance.UFODestroyed();
+        SpawnManager.Instance.UFODestroyed();       // Starts the spawnning timer for the next UFO
         Destroy(gameObject);
     }
 }

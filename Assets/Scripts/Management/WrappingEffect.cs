@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class WrappingEffect : MonoBehaviour
 {
+    [Tooltip("Extra padding on the play area margings for wrapping effect. Set larger for larger objects.")]
+    [SerializeField] private float edgePadding = 0.1f;      // Allows for a visually smoother wrapping effect
+
     private float[] playAreaLimits;
-    [SerializeField] private float edgePadding = 1.0f;      //  (1.0 by default)
 
     private void Start()
     {

@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePadding: 1
+  edgePadding: 0.5
 --- !u!114 &3923217041733608658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,9 +113,6 @@ MonoBehaviour:
   explosionSound: {fileID: 6477146240952904309}
   splitAsteroidsPrefab: {fileID: 646645698722290892, guid: 0c96a033d8432497d9eef743b62f6964,
     type: 3}
-  behavioursToDisable:
-  - {fileID: 3923217041733608658}
-  - {fileID: 3923217041733608659}
 --- !u!82 &6477146240952904309
 AudioSource:
   m_ObjectHideFlags: 0

@@ -74,9 +74,29 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (gameStarted && !gameOver && Input.GetButtonDown("Cancel"))
+        if (!gameOver)
         {
-            PauseGame();
+            if (!gameStarted)
+            {
+                if (Input.GetButtonDown("Submit"))
+                {
+                    StartGame();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    PauseGame();
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown("Submit"))
+            {
+                RestartGame();
+            }
         }
     }
 
@@ -165,7 +185,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Calls player respawner spending one player life. If no lives are left calls GameOver.
+    /// Calls player respawner spending one life. If no lives are left, calls GameOver.
     /// </summary>
     public void PlayerDied()
     {
@@ -213,7 +233,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void GameOver()
     {
-        Time.timeScale = 0f; //Sets the timescale to 0 (which freezes time)
+        Time.timeScale = 0f;                        //Sets the timescale to 0 (which freezes time)
         StopAllAudio();
         gameOverScreenUI.SetActive(true);
         gameOver = true;

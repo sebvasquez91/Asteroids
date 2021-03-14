@@ -4948,7 +4948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePadding: 1
+  edgePadding: 0.1
 --- !u!114 &3843921087243939043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4979,10 +4979,6 @@ MonoBehaviour:
   modelObject: {fileID: 4343964049339638388}
   explosionParticle: {fileID: 2290603402632240840}
   explosionSound: {fileID: -4639335581418213140}
-  behavioursToDisable:
-  - {fileID: 3843921087243939054}
-  - {fileID: 3843921087243939043}
-  - {fileID: 3843921087243939041}
 --- !u!82 &-4639335581418213140
 AudioSource:
   m_ObjectHideFlags: 0

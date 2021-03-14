@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f499ab44570cd419a85744c1e48be970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgePadding: 1
+  edgePadding: 0.1
 --- !u!114 &6918771558909442508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,10 +305,6 @@ MonoBehaviour:
   modelObject: {fileID: 5366744317978216341}
   explosionParticle: {fileID: 6888992951601012482}
   explosionSound: {fileID: -1630925301341812126}
-  behavioursToDisable:
-  - {fileID: 6918771558909442499}
-  - {fileID: 6918771558909442508}
-  - {fileID: 6918771558909442509}
 --- !u!82 &-1630925301341812126
 AudioSource:
   m_ObjectHideFlags: 0
