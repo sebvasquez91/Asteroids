@@ -1280,7 +1280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 38.43, y: -70}
+  m_AnchoredPosition: {x: 38.429688, y: -70}
   m_SizeDelta: {x: 157.52324, y: 46.393982}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &734311663
@@ -2250,7 +2250,6 @@ MonoBehaviour:
   scoreText: {fileID: 734311663}
   lifeSpritePrefab: {fileID: 2881550516691784443, guid: dd44731c1dc4d4b74933de05f3341c0f,
     type: 3}
-  lifeSpriteSpacing: 30
   invinciblePlayer: 0
   infiniteLives: 0
   playAreaLimits: []

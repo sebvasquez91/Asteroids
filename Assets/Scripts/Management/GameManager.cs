@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject playTimeUI;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject lifeSpritePrefab;
-    [SerializeField] private float lifeSpriteSpacing = 30;
 
     [Header("Debugging Properties")]
     [SerializeField] public bool invinciblePlayer = false;
@@ -153,7 +152,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < nLivesToAdd; i++)
         {
             lifeSprites.Add(Instantiate(lifeSpritePrefab, playTimeUI.transform) as GameObject);
-            lifeSprites[lifeSprites.Count - 1].GetComponent<RectTransform>().Translate(lifeSpriteSpacing * lifeSprites.Count, 0, 0);
+            RectTransform lifeSpriteRect = lifeSprites[lifeSprites.Count - 1].GetComponent<RectTransform>();
+            lifeSpriteRect.Translate(lifeSpriteRect.rect.width * lifeSpriteRect.lossyScale.x * lifeSprites.Count, 0, 0); // Scale width by lossyScale.x to ensure appropiate spacing across screen sizes
         }
     }
 
